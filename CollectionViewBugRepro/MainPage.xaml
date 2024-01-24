@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CollectionViewBugRepro"
+             x:Class="CollectionViewBugRepro.MainPage">
+
+    <ContentPage.Resources>
+        <local:MyTemplateSelector x:Key="myTemplateSelector"
+                              TemplateOne="{StaticResource templateOne}"
+                              TemplateTwo="{StaticResource templateTwo}" />
+    </ContentPage.Resources>
+    <RefreshView
+                Command="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsRefreshing}">
+        <CollectionView HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    SelectionMode="None"
+                    ItemsSource="{Binding MyList}"
+                    ItemTemplate="{StaticResource myTemplateSelector}"
+                    ItemSizingStrategy="MeasureAllItems">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
+            </CollectionView.ItemsLayout>
+        </CollectionView>
+    </RefreshView>
+
+</ContentPage>
